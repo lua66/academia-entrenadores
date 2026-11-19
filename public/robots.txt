@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+Disallow: /ir-whatsapp
+Sitemap: /sitemap.xml

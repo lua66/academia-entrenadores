@@ -1,0 +1,6 @@
+{
+  "name": "Del Fundamento al Juego · Curso Nivel C",
+  "description": "Curso de formación de entrenadores de baloncesto de iniciación (8 a 14 años) con certificación Nivel C.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

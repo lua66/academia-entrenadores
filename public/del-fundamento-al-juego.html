@@ -1,0 +1,1546 @@
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Del Fundamento al Juego · Curso Entrenadores Nivel C | Altura BC</title>
+    <meta
+      name="description"
+      content="Formación práctica de 64 horas en CDMX para entrenar baloncesto de 8 a 14 años. Obtén tu Constancia Nivel C con Altura BC."
+    />
+    <link rel="icon" type="image/png" sizes="48x48" href="/assets/aistudio/altura-bc-perfil-1080x1080_f56c00a5.png" />
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/aistudio/altura-bc-perfil-1080x1080_f56c00a5.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/aistudio/altura-bc-perfil-1080x1080_f56c00a5.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;600;700&family=Rubik:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --night: #141A2B;
+        --night-deep: #0E1320;
+        --night-card: #1B2338;
+        --cream: #F5F1EA;
+        --orange: #F2701C;
+        --orange-hover: #D95E0E;
+      }
+
+      *, *::before, *::after {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        scroll-padding-top: 4.5rem;
+        font-family: "Rubik", ui-sans-serif, system-ui, sans-serif;
+      }
+
+      body {
+        margin: 0;
+        background-color: var(--night);
+        color: var(--cream);
+        line-height: 1.55;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      h1, h2, h3, .font-display {
+        font-family: "Oswald", ui-sans-serif, system-ui, sans-serif;
+        margin: 0;
+      }
+
+      p {
+        margin: 0;
+      }
+
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+
+      .tabular {
+        font-variant-numeric: tabular-nums;
+      }
+
+      .container {
+        width: 100%;
+        max-width: 1152px;
+        margin: 0 auto;
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+
+      @media (min-width: 640px) {
+        .container {
+          padding-left: 1.5rem;
+          padding-right: 1.5rem;
+        }
+      }
+
+      /* Reveal animation */
+      .reveal {
+        opacity: 0;
+        transform: translateY(22px);
+        transition: opacity 0.55s cubic-bezier(0.16, 1, 0.3, 1),
+          transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+      }
+
+      .reveal.visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+
+      /* Topbar */
+      .topbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 4rem;
+        z-index: 40;
+        background: rgba(20, 26, 43, 0.95);
+        backdrop-filter: blur(6px);
+        border-bottom: 1px solid rgba(245, 241, 234, 0.12);
+      }
+
+      .topbar-inner {
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 2rem;
+      }
+
+      .brand {
+        font-family: "Oswald", sans-serif;
+        font-weight: 700;
+        font-size: 1.15rem;
+        text-transform: uppercase;
+        letter-spacing: -0.01em;
+        white-space: nowrap;
+        flex-shrink: 0;
+      }
+
+      .nav-links {
+        display: none;
+        align-items: center;
+        gap: 1.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+        color: rgba(245, 241, 234, 0.82);
+      }
+
+      .nav-links a {
+        white-space: nowrap;
+      }
+
+      .nav-links a:hover {
+        color: var(--cream);
+        text-decoration: underline;
+        text-underline-offset: 4px;
+      }
+
+      @media (min-width: 768px) {
+        .nav-links {
+          display: flex;
+        }
+      }
+
+      .btn-primary {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.6rem;
+        background: var(--orange);
+        color: var(--night);
+        font-weight: 600;
+        border: none;
+        border-radius: 0.5rem;
+        cursor: pointer;
+        transition: background-color 0.18s ease;
+        white-space: nowrap;
+        font-family: inherit;
+      }
+
+      .btn-primary:hover {
+        background: var(--orange-hover);
+      }
+
+      .btn-sm {
+        padding: 0.5rem 1rem;
+        font-size: 0.875rem;
+      }
+
+      .btn-lg {
+        padding: 0.875rem 1.75rem;
+        font-size: 1rem;
+      }
+
+      main {
+        padding-top: 4rem;
+      }
+
+      /* Section Themes */
+      .sec-dark {
+        background: var(--night);
+        color: var(--cream);
+        padding: 4rem 0;
+      }
+
+      .sec-cream {
+        background: var(--cream);
+        color: var(--night);
+        padding: 4rem 0;
+        position: relative;
+        overflow: hidden;
+      }
+
+      @media (min-width: 640px) {
+        .sec-dark, .sec-cream {
+          padding: 5.5rem 0;
+        }
+      }
+
+      .kicker {
+        font-size: 0.82rem;
+        font-weight: 500;
+        letter-spacing: 0.03em;
+        color: var(--orange);
+        margin-bottom: 0.5rem;
+      }
+
+      .sec-cream .kicker {
+        color: var(--orange-hover);
+      }
+
+      .sec-title {
+        font-size: clamp(2rem, 4vw, 3rem);
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 1.02;
+        letter-spacing: -0.01em;
+      }
+
+      /* 1. Hero */
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      @media (min-width: 1024px) {
+        .hero-grid {
+          grid-template-columns: 7fr 5fr;
+          gap: 3rem;
+        }
+      }
+
+      .hero-title {
+        font-size: clamp(2.85rem, 6vw, 4.25rem);
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 0.96;
+        letter-spacing: -0.015em;
+        text-wrap: balance;
+      }
+
+      .hero-sub {
+        font-size: clamp(1.1rem, 2vw, 1.3rem);
+        color: rgba(245, 241, 234, 0.9);
+        margin-top: 1.25rem;
+      }
+
+      .hero-copy {
+        margin-top: 1rem;
+        color: rgba(245, 241, 234, 0.76);
+        max-width: 36rem;
+      }
+
+      .hero-meta {
+        margin-top: 1.25rem;
+        margin-bottom: 1.75rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4rem 0.75rem;
+        font-size: 0.92rem;
+        color: rgba(245, 241, 234, 0.88);
+      }
+
+      .hero-meta .dot {
+        color: var(--orange);
+      }
+
+      /* 2. Why */
+      .why-quote {
+        font-size: clamp(2rem, 4.5vw, 3.1rem);
+        font-weight: 700;
+        text-transform: uppercase;
+        line-height: 1.03;
+        max-width: 48rem;
+        text-wrap: balance;
+      }
+
+      .why-grid {
+        margin-top: 2rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .why-grid {
+          grid-template-columns: 7fr 5fr;
+        }
+      }
+
+      .why-side {
+        border-top: 1px solid rgba(20, 26, 43, 0.16);
+        padding-top: 1.25rem;
+      }
+
+      @media (min-width: 768px) {
+        .why-side {
+          border-top: none;
+          border-left: 1px solid rgba(20, 26, 43, 0.16);
+          padding-top: 0;
+          padding-left: 2rem;
+        }
+      }
+
+      /* 3. Metrics */
+      .metrics-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        margin-top: 2.5rem;
+      }
+
+      @media (min-width: 640px) {
+        .metrics-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .metrics-grid {
+          grid-template-columns: repeat(4, 1fr);
+          gap: 0;
+        }
+        .metric-item {
+          padding: 0 1.5rem;
+          border-left: 1px solid rgba(245, 241, 234, 0.15);
+        }
+        .metric-item:first-child {
+          padding-left: 0;
+          border-left: none;
+        }
+      }
+
+      .metric-num {
+        font-family: "Oswald", sans-serif;
+        font-size: 3.5rem;
+        font-weight: 700;
+        color: var(--orange);
+        line-height: 1;
+      }
+
+      /* 4. Outcomes */
+      .outcomes-grid {
+        margin-top: 2.5rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      @media (min-width: 768px) {
+        .outcomes-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .outcomes-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        .outcome-first {
+          grid-column: span 2;
+        }
+      }
+
+      .card-light {
+        background: rgba(255, 255, 255, 0.72);
+        border: 1px solid rgba(20, 26, 43, 0.12);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+      }
+
+      /* 5. Timeline */
+      .timeline-wrap {
+        position: relative;
+        margin-top: 2.5rem;
+      }
+
+      .timeline-list {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .timeline-spine-v {
+        position: absolute;
+        left: 0.55rem;
+        top: 0.5rem;
+        bottom: 0.5rem;
+        width: 1px;
+        background: rgba(245, 241, 234, 0.25);
+      }
+
+      .timeline-spine-h {
+        display: none;
+      }
+
+      .timeline-step {
+        position: relative;
+        padding-left: 2.25rem;
+      }
+
+      .timeline-dot {
+        position: absolute;
+        left: 0.1rem;
+        top: 0.35rem;
+        width: 0.95rem;
+        height: 0.95rem;
+        border-radius: 999px;
+        background: var(--orange);
+        box-shadow: 0 0 0 4px var(--night);
+      }
+
+      @media (min-width: 1024px) {
+        .timeline-spine-v {
+          display: none;
+        }
+        .timeline-spine-h {
+          display: block;
+          position: absolute;
+          top: 0.9rem;
+          left: 0;
+          right: 0;
+          height: 1px;
+          background: rgba(245, 241, 234, 0.25);
+        }
+        .timeline-list {
+          grid-template-columns: repeat(5, 1fr);
+          gap: 1.25rem;
+        }
+        .timeline-step {
+          padding-left: 0;
+          padding-top: 2.5rem;
+        }
+        .timeline-dot {
+          left: 0;
+          top: 0.45rem;
+        }
+      }
+
+      .orange-ribbon {
+        background: var(--orange);
+        color: var(--night);
+        padding: 1.15rem 1rem;
+        text-align: center;
+        font-family: "Oswald", sans-serif;
+        font-size: clamp(1.15rem, 2.2vw, 1.55rem);
+        font-weight: 700;
+        text-transform: uppercase;
+        letter-spacing: 0.02em;
+      }
+
+      /* 6. Method */
+      .pde-grid {
+        margin-top: 2rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+        align-items: stretch;
+      }
+
+      @media (min-width: 768px) {
+        .pde-grid {
+          grid-template-columns: 1fr auto 1fr auto 1fr;
+        }
+      }
+
+      .pde-arrow {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--orange);
+        font-weight: 700;
+        font-size: 1.5rem;
+      }
+
+      .compare-grid {
+        margin-top: 2.5rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 768px) {
+        .compare-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      .method-banner {
+        margin-top: 2.5rem;
+        background: var(--night);
+        color: var(--cream);
+        border-radius: 0.75rem;
+        padding: 1.75rem;
+        display: flex;
+        flex-direction: column;
+        gap: 1rem;
+      }
+
+      @media (min-width: 768px) {
+        .method-banner {
+          flex-direction: row;
+          align-items: center;
+          justify-content: space-between;
+          padding: 2rem;
+        }
+      }
+
+      /* 7. Toolkit */
+      .toolkit-grid {
+        margin-top: 2.5rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1rem;
+      }
+
+      @media (min-width: 640px) {
+        .toolkit-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .toolkit-grid {
+          grid-template-columns: repeat(5, 1fr);
+        }
+      }
+
+      .card-dark {
+        background: var(--night-card);
+        border: 1px solid rgba(245, 241, 234, 0.12);
+        border-radius: 0.75rem;
+        padding: 1.25rem;
+      }
+
+      /* 8. Nivel C */
+      .eval-bar {
+        margin-top: 1.25rem;
+        height: 2.25rem;
+        width: 100%;
+        border-radius: 0.5rem;
+        overflow: hidden;
+        display: flex;
+        border: 1px solid rgba(20, 26, 43, 0.15);
+      }
+
+      .eval-bar > div {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "Oswald", sans-serif;
+        font-weight: 700;
+        font-size: 0.9rem;
+      }
+
+      .req-grid {
+        margin-top: 1.75rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      @media (min-width: 768px) {
+        .req-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* 9. Instructor */
+      .instructor-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2.5rem;
+        align-items: center;
+      }
+
+      @media (min-width: 1024px) {
+        .instructor-grid {
+          grid-template-columns: 4fr 8fr;
+        }
+      }
+
+      .logistics-grid {
+        margin-top: 3rem;
+        padding-top: 2.5rem;
+        border-top: 1px solid rgba(245, 241, 234, 0.15);
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      @media (min-width: 640px) {
+        .logistics-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (min-width: 1024px) {
+        .logistics-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* 10. FAQ */
+      .faq-list {
+        margin-top: 2rem;
+        border-top: 1px solid rgba(20, 26, 43, 0.16);
+      }
+
+      .faq-item {
+        border-bottom: 1px solid rgba(20, 26, 43, 0.16);
+      }
+
+      .faq-btn {
+        width: 100%;
+        background: none;
+        border: none;
+        padding: 1.25rem 0;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        text-align: left;
+        cursor: pointer;
+        color: var(--night);
+        font-family: "Oswald", sans-serif;
+        font-size: 1.35rem;
+        font-weight: 600;
+        text-transform: uppercase;
+      }
+
+      .faq-panel {
+        padding-bottom: 1.25rem;
+        color: rgba(20, 26, 43, 0.82);
+        font-size: 0.975rem;
+        display: none;
+      }
+
+      .faq-item.open .faq-panel {
+        display: block;
+      }
+
+      .faq-icon {
+        color: var(--orange);
+        font-size: 1.25rem;
+        transition: transform 0.2s ease;
+        flex-shrink: 0;
+      }
+
+      .faq-item.open .faq-icon {
+        transform: rotate(180deg);
+      }
+
+      /* 11. Form */
+      .form-box {
+        margin-top: 2rem;
+        background: var(--night-card);
+        border: 1px solid rgba(245, 241, 234, 0.12);
+        border-radius: 0.75rem;
+        padding: 1.5rem;
+      }
+
+      @media (min-width: 640px) {
+        .form-box {
+          padding: 2rem;
+        }
+      }
+
+      .form-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.25rem;
+      }
+
+      @media (min-width: 640px) {
+        .form-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .span-2 {
+          grid-column: span 2;
+        }
+      }
+
+      label.field-label {
+        display: block;
+        font-size: 0.875rem;
+        font-weight: 500;
+        margin-bottom: 0.4rem;
+      }
+
+      input[type="text"],
+      input[type="number"],
+      input[type="tel"],
+      input[type="email"],
+      select {
+        width: 100%;
+        padding: 0.75rem 0.95rem;
+        border-radius: 0.5rem;
+        background: var(--night);
+        border: 1px solid rgba(245, 241, 234, 0.22);
+        color: var(--cream);
+        font-family: inherit;
+        font-size: 0.95rem;
+      }
+
+      input:focus, select:focus {
+        outline: none;
+        border-color: var(--orange);
+      }
+
+      .field-error {
+        margin-top: 0.35rem;
+        font-size: 0.78rem;
+        color: #FF995A;
+      }
+
+      /* Footer */
+      footer {
+        background: var(--night-deep);
+        border-top: 1px solid rgba(245, 241, 234, 0.12);
+        padding: 3rem 0;
+        font-size: 0.875rem;
+      }
+
+      .footer-grid {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      @media (min-width: 768px) {
+        .footer-grid {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+
+      /* Floating Mobile WhatsApp */
+      .wa-float {
+        position: fixed;
+        bottom: 1rem;
+        right: 1rem;
+        z-index: 40;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.45rem;
+        padding: 0.75rem 1rem;
+        border-radius: 999px;
+        background: var(--orange);
+        color: var(--night);
+        font-weight: 600;
+        font-size: 0.875rem;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.35);
+      }
+
+      @media (min-width: 768px) {
+        .wa-float {
+          display: none;
+        }
+      }
+
+      /* Modal */
+      .modal-backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        background: rgba(11, 15, 26, 0.82);
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+      }
+
+      .modal-backdrop.open {
+        display: flex;
+      }
+
+      .modal-card {
+        width: 100%;
+        max-width: 40rem;
+        max-height: 85vh;
+        overflow-y: auto;
+        background: var(--cream);
+        color: var(--night);
+        border-radius: 0.75rem;
+        padding: 1.75rem;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Barra superior fija -->
+    <header class="topbar">
+      <div class="container topbar-inner">
+        <a href="#inicio" class="brand" style="display:inline-flex;align-items:center;gap:0.6rem;">
+          <img src="/assets/aistudio/altura-bc-perfil-1080x1080_f56c00a5.png" alt="Logo Altura BC" referrerpolicy="no-referrer" style="width:36px;height:36px;border-radius:999px;object-fit:cover;border:1px solid rgba(245,241,234,0.25);" />
+          <span>Del Fundamento al Juego</span>
+        </a>
+        <nav class="nav-links" aria-label="Navegación principal">
+          <a href="#por-que">Por qué</a>
+          <a href="#recorrido">Recorrido</a>
+          <a href="#metodo">Método</a>
+          <a href="#preguntas">Preguntas</a>
+        </nav>
+        <a href="#inscripcion" class="btn-primary btn-sm">Inscríbete</a>
+      </div>
+    </header>
+
+    <main>
+      <!-- 1. HERO -->
+      <section id="inicio" class="sec-dark" style="border-bottom: 1px solid rgba(245,241,234,0.1);">
+        <div class="container hero-grid">
+          <div>
+            <p class="kicker">Altura BC · CDMX · 2,240 m</p>
+            <h1 class="hero-title">Del Fundamento al Juego</h1>
+            <p class="hero-sub">Metodología para entrenadores de iniciación · Nivel C</p>
+            <p class="hero-copy">
+              Formación práctica para entrenar a niñas y niños de 8 a 14 años sin filas largas ni
+              improvisación. No requiere experiencia previa como jugador federado.
+            </p>
+            <div class="hero-meta tabular">
+              <span>Inicia: <strong>18 de abril de 2026</strong></span>
+              <span class="dot" aria-hidden="true">·</span>
+              <span><strong>24</strong> plazas disponibles</span>
+              <span class="dot" aria-hidden="true">·</span>
+              <span>Mayores de 18 años</span>
+            </div>
+            <a href="#inscripcion" class="btn-primary btn-lg">
+              <span>Quiero inscribirme</span>
+              <span aria-hidden="true">→</span>
+            </a>
+          </div>
+
+          <div>
+            <!-- Ilustración SVG de media cancha con balón -->
+            <svg viewBox="0 0 560 480" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;max-width:440px;display:block;margin:0 auto;" role="img" aria-label="Media cancha de baloncesto con balón">
+              <rect x="24" y="24" width="512" height="432" rx="12" fill="#192136" stroke="#F5F1EA" stroke-opacity="0.24" stroke-width="2" />
+              <rect x="48" y="44" width="464" height="392" stroke="#F5F1EA" stroke-opacity="0.72" stroke-width="2.5" />
+              <path d="M 88 44 L 88 148 A 204 204 0 0 0 472 148 L 472 44" stroke="#F5F1EA" stroke-opacity="0.72" stroke-width="2.5" />
+              <rect x="196" y="44" width="168" height="186" fill="#F2701C" fill-opacity="0.08" stroke="#F5F1EA" stroke-opacity="0.72" stroke-width="2.5" />
+              <path d="M 218 230 A 62 62 0 0 0 342 230" stroke="#F5F1EA" stroke-opacity="0.72" stroke-width="2.5" />
+              <path d="M 218 230 A 62 62 0 0 1 342 230" stroke="#F5F1EA" stroke-opacity="0.3" stroke-width="2" stroke-dasharray="6 6" />
+              <line x1="242" y1="66" x2="318" y2="66" stroke="#F5F1EA" stroke-width="3.5" stroke-linecap="round" />
+              <line x1="280" y1="66" x2="280" y2="76" stroke="#F5F1EA" stroke-width="2.5" />
+              <circle cx="280" cy="86" r="11" stroke="#F2701C" stroke-width="3.5" fill="#141A2B" />
+              <path d="M 216 436 A 64 64 0 0 1 344 436" stroke="#F5F1EA" stroke-opacity="0.72" stroke-width="2.5" />
+              <path d="M 145 304 Q 168 236 226 178" stroke="#F2701C" stroke-width="2.2" stroke-dasharray="7 5" stroke-linecap="round" />
+              <polygon points="232,172 220,176 227,184" fill="#F2701C" />
+              <circle cx="145" cy="308" r="12" fill="#141A2B" stroke="#F5F1EA" stroke-width="2.2" />
+              <text x="145" y="312" text-anchor="middle" fill="#F5F1EA" font-size="11" font-family="Oswald, sans-serif" font-weight="600">1</text>
+              <g transform="translate(280, 306)">
+                <circle cx="0" cy="0" r="44" fill="#F2701C" stroke="#141A2B" stroke-width="2.5" />
+                <line x1="-43" y1="0" x2="43" y2="0" stroke="#141A2B" stroke-width="2.5" />
+                <line x1="0" y1="-43" x2="0" y2="43" stroke="#141A2B" stroke-width="2.5" />
+                <path d="M -29 -32 C -11 -16 -11 16 -29 32" stroke="#141A2B" stroke-width="2.5" fill="none" />
+                <path d="M 29 -32 C 11 -16 11 16 29 32" stroke="#141A2B" stroke-width="2.5" fill="none" />
+              </g>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- 2. POR QUÉ ESTE CURSO -->
+      <section id="por-que" class="sec-cream">
+        <div class="container reveal">
+          <p class="kicker">Por qué este curso</p>
+          <h2 class="why-quote">«El primer entrenador decide si un niño sigue jugando»</h2>
+          <div class="why-grid">
+            <div style="display:flex;flex-direction:column;gap:1rem;color:rgba(20,26,43,0.85);">
+              <p>
+                Muchos entrenadores enseñan como aprendieron: con filas largas, mucha explicación y
+                poco juego. Los niños pasan media práctica esperando su turno y terminan perdiendo
+                el gusto por la cancha.
+              </p>
+              <p>
+                Este curso te entrega un método claro para enseñar bien desde el primer día: cómo
+                organizar a tu grupo, qué enseñar entre los 8 y 14 años y cómo lograr que cada
+                ejercicio tenga sentido en el partido.
+              </p>
+            </div>
+            <div class="why-side">
+              <h3 class="font-display" style="font-size:1.25rem;text-transform:uppercase;">¿Para quién es?</h3>
+              <p style="margin-top:0.5rem;font-size:0.95rem;color:rgba(20,26,43,0.8);">
+                Aspirantes a entrenador, profesores de educación física, madres, padres y
+                exjugadores mayores de 18 años. No se requiere experiencia previa como jugador
+                federado.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. EL CURSO EN CIFRAS -->
+      <section id="cifras" class="sec-dark" style="border-top:1px solid rgba(245,241,234,0.1);border-bottom:1px solid rgba(245,241,234,0.1);">
+        <div class="container reveal">
+          <h2 class="sec-title">El curso en cifras</h2>
+          <div class="metrics-grid">
+            <div class="metric-item">
+              <div class="metric-num tabular" data-counter="64">0</div>
+              <h3 style="margin-top:0.75rem;font-size:1.25rem;text-transform:uppercase;">Horas de formación</h3>
+              <p style="margin-top:0.4rem;font-size:0.875rem;color:rgba(245,241,234,0.75);">38 horas en cancha y 26 horas de análisis y diseño.</p>
+            </div>
+            <div class="metric-item">
+              <div class="metric-num tabular" data-counter="5">0</div>
+              <h3 style="margin-top:0.75rem;font-size:1.25rem;text-transform:uppercase;">Bloques formativos</h3>
+              <p style="margin-top:0.4rem;font-size:0.875rem;color:rgba(245,241,234,0.75);">De cómo aprende el niño hasta gestión de grupo.</p>
+            </div>
+            <div class="metric-item">
+              <div class="metric-num tabular" data-counter="70" data-suffix=" %">0 %</div>
+              <h3 style="margin-top:0.75rem;font-size:1.25rem;text-transform:uppercase;">Tiempo en acción</h3>
+              <p style="margin-top:0.4rem;font-size:0.875rem;color:rgba(245,241,234,0.75);">De cada sesión con cada jugador activo y tomando decisiones.</p>
+            </div>
+            <div class="metric-item">
+              <div class="metric-num tabular" data-counter="1">0</div>
+              <h3 style="margin-top:0.75rem;font-size:1.25rem;text-transform:uppercase;">Constancia Nivel C</h3>
+              <p style="margin-top:0.4rem;font-size:0.875rem;color:rgba(245,241,234,0.75);">Acreditación respaldada por evaluación práctica con rúbrica.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. LO QUE SABRÁS HACER AL TERMINAR -->
+      <section id="resultados" class="sec-cream">
+        <div class="container reveal">
+          <p class="kicker">Competencias prácticas</p>
+          <h2 class="sec-title">Lo que sabrás hacer al terminar</h2>
+          <div class="outcomes-grid">
+            <article class="card-light outcome-first">
+              <span class="font-display tabular" style="font-size:1.85rem;font-weight:700;color:var(--orange);">01</span>
+              <h3 style="margin-top:0.5rem;font-size:1.45rem;text-transform:uppercase;">Demostrar y explicar los fundamentos en menos de un minuto</h3>
+              <p style="margin-top:0.5rem;color:rgba(20,26,43,0.8);">Sintetiza la consigna clave y muéstrala con claridad para que tu grupo empiece a jugar de inmediato.</p>
+            </article>
+            <article class="card-light">
+              <span class="font-display tabular" style="font-size:1.85rem;font-weight:700;color:var(--orange);">02</span>
+              <h3 style="margin-top:0.5rem;font-size:1.45rem;text-transform:uppercase;">Planificar sesiones de 60 a 90 minutos con objetivos claros</h3>
+              <p style="margin-top:0.5rem;color:rgba(20,26,43,0.8);">Estructura cada práctica con orden entre calentamiento, progresión y juego real.</p>
+            </article>
+            <article class="card-light">
+              <span class="font-display tabular" style="font-size:1.85rem;font-weight:700;color:var(--orange);">03</span>
+              <h3 style="margin-top:0.5rem;font-size:1.45rem;text-transform:uppercase;">Diseñar ejercicios y progresiones con transferencia al juego</h3>
+              <p style="margin-top:0.5rem;color:rgba(20,26,43,0.8);">Convierte filas estáticas en tareas dinámicas con compañeros, rivales y espacio.</p>
+            </article>
+            <article class="card-light">
+              <span class="font-display tabular" style="font-size:1.85rem;font-weight:700;color:var(--orange);">04</span>
+              <h3 style="margin-top:0.5rem;font-size:1.45rem;text-transform:uppercase;">Detectar errores y corregirlos con una indicación breve</h3>
+              <p style="margin-top:0.5rem;color:rgba(20,26,43,0.8);">Identifica qué corregir primero sin detener la fluidez de la sesión.</p>
+            </article>
+            <article class="card-light">
+              <span class="font-display tabular" style="font-size:1.85rem;font-weight:700;color:var(--orange);">05</span>
+              <h3 style="margin-top:0.5rem;font-size:1.45rem;text-transform:uppercase;">Dirigir un grupo con orden y un clima de aprendizaje</h3>
+              <p style="margin-top:0.5rem;color:rgba(20,26,43,0.8);">Crea rutinas ágiles y un ambiente positivo donde niñas y niños quieran volver.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. EL RECORRIDO -->
+      <section id="recorrido" class="sec-dark" style="padding-bottom:0;">
+        <div class="container reveal" style="padding-bottom:3.5rem;">
+          <p class="kicker">Estructura de las 64 horas</p>
+          <h2 class="sec-title">El recorrido</h2>
+          <div class="timeline-wrap">
+            <div class="timeline-spine-v" aria-hidden="true"></div>
+            <div class="timeline-spine-h" aria-hidden="true"></div>
+            <ol class="timeline-list">
+              <li class="timeline-step">
+                <span class="timeline-dot" aria-hidden="true"></span>
+                <p style="font-size:0.78rem;color:var(--orange);font-weight:500;">Módulo introductorio</p>
+                <h3 style="margin-top:0.25rem;font-size:1.25rem;text-transform:uppercase;">Cómo se aprende</h3>
+                <p style="margin-top:0.4rem;font-size:0.875rem;color:rgba(245,241,234,0.75);">Habilidades técnico-tácticas, fases del aprendizaje y transferencia.</p>
+              </li>
+              <li class="timeline-step">
+                <span class="timeline-dot" aria-hidden="true"></span>
+                <p class="tabular" style="font-size:0.78rem;color:var(--orange);font-weight:500;">Etapa 1 · Iniciación (20 h)</p>
+                <h3 style="margin-top:0.25rem;font-size:1.25rem;text-transform:uppercase;">Base motriz y balón</h3>
+                <p style="margin-top:0.4rem;font-size:0.875rem;color:rgba(245,241,234,0.75);">Posición, desplazamientos, pivote y bote.</p>
+              </li>
+              <li class="timeline-step">
+                <span class="timeline-dot" aria-hidden="true"></span>
+                <p class="tabular" style="font-size:0.78rem;color:var(--orange);font-weight:500;">Etapa 2 · Desarrollo (20 h)</p>
+                <h3 style="margin-top:0.25rem;font-size:1.25rem;text-transform:uppercase;">Conexión y aro</h3>
+                <p style="margin-top:0.4rem;font-size:0.875rem;color:rgba(245,241,234,0.75);">Pase, recepción, tiro y entrada a canasta.</p>
+              </li>
+              <li class="timeline-step">
+                <span class="timeline-dot" aria-hidden="true"></span>
+                <p class="tabular" style="font-size:0.78rem;color:var(--orange);font-weight:500;">Etapa 3 · Consolidación (20 h)</p>
+                <h3 style="margin-top:0.25rem;font-size:1.25rem;text-transform:uppercase;">Duelo y juego reducido</h3>
+                <p style="margin-top:0.4rem;font-size:0.875rem;color:rgba(245,241,234,0.75);">Defensa, rebote, 1x1 y juego reducido.</p>
+              </li>
+              <li class="timeline-step">
+                <span class="timeline-dot" aria-hidden="true"></span>
+                <p class="tabular" style="font-size:0.78rem;color:var(--orange);font-weight:500;">Módulo final (4 h)</p>
+                <h3 style="margin-top:0.25rem;font-size:1.25rem;text-transform:uppercase;">Gestión de grupo</h3>
+                <p style="margin-top:0.4rem;font-size:0.875rem;color:rgba(245,241,234,0.75);">Liderazgo, normas, clima e inclusión.</p>
+              </li>
+            </ol>
+          </div>
+        </div>
+        <div class="orange-ribbon">
+          Hilo conductor de todo el curso: metodología y diseño de ejercicios
+        </div>
+      </section>
+
+      <!-- 6. EL MÉTODO -->
+      <section id="metodo" class="sec-cream">
+        <div class="container reveal">
+          <p class="kicker">Cómo toma decisiones el jugador</p>
+          <h2 class="sec-title">El método</h2>
+
+          <div class="pde-grid">
+            <div class="card-light">
+              <span style="font-size:0.75rem;font-weight:600;color:var(--orange-hover);">Fase 01</span>
+              <h3 style="font-size:1.6rem;text-transform:uppercase;">Percibir</h3>
+              <p style="margin-top:0.4rem;font-size:0.9rem;color:rgba(20,26,43,0.8);">Leer compañeros, defensores y espacios libres antes de actuar.</p>
+            </div>
+            <div class="pde-arrow" aria-hidden="true">→</div>
+            <div class="card-light">
+              <span style="font-size:0.75rem;font-weight:600;color:var(--orange-hover);">Fase 02</span>
+              <h3 style="font-size:1.6rem;text-transform:uppercase;">Decidir</h3>
+              <p style="margin-top:0.4rem;font-size:0.9rem;color:rgba(20,26,43,0.8);">Elegir la mejor solución en décimas de segundo: pasar, botar o tirar.</p>
+            </div>
+            <div class="pde-arrow" aria-hidden="true">→</div>
+            <div class="card-dark" style="background:var(--night);color:var(--cream);">
+              <span style="font-size:0.75rem;font-weight:600;color:var(--orange);">Fase 03</span>
+              <h3 style="font-size:1.6rem;text-transform:uppercase;">Ejecutar</h3>
+              <p style="margin-top:0.4rem;font-size:0.9rem;color:rgba(245,241,234,0.8);">Aplicar el gesto técnico con eficacia para resolver la jugada.</p>
+            </div>
+          </div>
+
+          <p style="margin-top:1.25rem;font-weight:500;max-width:46rem;">
+            Un ejercicio sin rivales ni compañeros solo entrena la última fase: ejecutar. En el
+            juego real, el niño primero percibe y decide.
+          </p>
+
+          <div class="compare-grid">
+            <div class="card-light">
+              <h3 style="font-size:1.5rem;text-transform:uppercase;">Metodología analítica</h3>
+              <p style="font-size:0.875rem;color:rgba(20,26,43,0.65);font-weight:500;">Controla el gesto técnico</p>
+              <p style="margin-top:0.75rem;font-size:0.95rem;color:rgba(20,26,43,0.85);">
+                Aísla la mecánica del movimiento para corregir un detalle concreto sin interferencias.
+              </p>
+            </div>
+            <div class="card-light" style="border-color:rgba(242,112,28,0.45);background:#fff;">
+              <h3 style="font-size:1.5rem;text-transform:uppercase;">Metodología global</h3>
+              <p style="font-size:0.875rem;color:var(--orange-hover);font-weight:500;">Desarrolla la toma de decisiones</p>
+              <p style="margin-top:0.75rem;font-size:0.95rem;color:rgba(20,26,43,0.85);">
+                Pone al jugador frente a compañeros y oposición real para transferir lo aprendido al partido.
+              </p>
+            </div>
+          </div>
+
+          <div class="method-banner">
+            <div>
+              <p style="font-size:0.75rem;text-transform:uppercase;color:var(--orange);font-weight:600;">Criterio de sesión</p>
+              <p class="font-display" style="font-size:1.75rem;font-weight:700;text-transform:uppercase;">
+                Método base: global → analítico → global
+              </p>
+            </div>
+            <p style="font-size:0.95rem;color:rgba(245,241,234,0.82);max-width:26rem;">
+              Partes del problema real, corriges el gesto técnico en un bloque breve y regresas a la situación con decisión.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- 7. TU CAJA DE HERRAMIENTAS -->
+      <section id="herramientas" class="sec-dark">
+        <div class="container reveal">
+          <p class="kicker">Diseño de tareas</p>
+          <h2 class="sec-title">Tu caja de herramientas</h2>
+          <p style="margin-top:0.75rem;color:rgba(245,241,234,0.8);max-width:38rem;">
+            Los 10 elementos prácticos para diseñar y adaptar cualquier ejercicio a la edad de tu grupo.
+          </p>
+          <div class="toolkit-grid">
+            <div class="card-dark"><span class="font-display tabular" style="color:var(--orange);font-weight:700;">01</span><h3 style="margin-top:0.25rem;text-transform:uppercase;">Objetivos</h3><p style="margin-top:0.5rem;font-size:0.82rem;color:rgba(245,241,234,0.75);">Define qué habilidad técnico-táctica debe resolver el jugador.</p></div>
+            <div class="card-dark"><span class="font-display tabular" style="color:var(--orange);font-weight:700;">02</span><h3 style="margin-top:0.25rem;text-transform:uppercase;">Colaboración</h3><p style="margin-top:0.5rem;font-size:0.82rem;color:rgba(245,241,234,0.75);">Establece cuántos compañeros interactúan y su rol.</p></div>
+            <div class="card-dark"><span class="font-display tabular" style="color:var(--orange);font-weight:700;">03</span><h3 style="margin-top:0.25rem;text-transform:uppercase;">Oposición</h3><p style="margin-top:0.5rem;font-size:0.82rem;color:rgba(245,241,234,0.75);">Regula la defensa: pasiva, condicionada o real.</p></div>
+            <div class="card-dark"><span class="font-display tabular" style="color:var(--orange);font-weight:700;">04</span><h3 style="margin-top:0.25rem;text-transform:uppercase;">Orientación</h3><p style="margin-top:0.5rem;font-size:0.82rem;color:rgba(245,241,234,0.75);">Marca la dirección del ataque y canastas válidas.</p></div>
+            <div class="card-dark"><span class="font-display tabular" style="color:var(--orange);font-weight:700;">05</span><h3 style="margin-top:0.25rem;text-transform:uppercase;">Número de jugadores</h3><p style="margin-top:0.5rem;font-size:0.82rem;color:rgba(245,241,234,0.75);">Ajusta el formato (1x1, 2x1, 3x3) para dar más balón.</p></div>
+            <div class="card-dark"><span class="font-display tabular" style="color:var(--orange);font-weight:700;">06</span><h3 style="margin-top:0.25rem;text-transform:uppercase;">Hándicap</h3><p style="margin-top:0.5rem;font-size:0.82rem;color:rgba(245,241,234,0.75);">Aplica ventajas o restricciones para provocar decisiones.</p></div>
+            <div class="card-dark"><span class="font-display tabular" style="color:var(--orange);font-weight:700;">07</span><h3 style="margin-top:0.25rem;text-transform:uppercase;">Espacios</h3><p style="margin-top:0.5rem;font-size:0.82rem;color:rgba(245,241,234,0.75);">Delimita carriles o zonas para estimular el gesto.</p></div>
+            <div class="card-dark"><span class="font-display tabular" style="color:var(--orange);font-weight:700;">08</span><h3 style="margin-top:0.25rem;text-transform:uppercase;">Tiempo</h3><p style="margin-top:0.5rem;font-size:0.82rem;color:rgba(245,241,234,0.75);">Introduce relojes cortos para acelerar la lectura.</p></div>
+            <div class="card-dark"><span class="font-display tabular" style="color:var(--orange);font-weight:700;">09</span><h3 style="margin-top:0.25rem;text-transform:uppercase;">Soporte cognitivo</h3><p style="margin-top:0.5rem;font-size:0.82rem;color:rgba(245,241,234,0.75);">Usa señales visuales que obliguen a levantar la vista.</p></div>
+            <div class="card-dark"><span class="font-display tabular" style="color:var(--orange);font-weight:700;">10</span><h3 style="margin-top:0.25rem;text-transform:uppercase;">Combinación de elementos</h3><p style="margin-top:0.5rem;font-size:0.82rem;color:rgba(245,241,234,0.75);">Mezcla variables para adaptar una tarea a varias edades.</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 8. CÓMO SE OBTIENE EL NIVEL C -->
+      <section id="certificacion" class="sec-cream">
+        <div class="container reveal">
+          <p class="kicker">Acreditación y criterios</p>
+          <h2 class="sec-title">Cómo se obtiene el Nivel C</h2>
+          <div class="card-light" style="margin-top:2rem;">
+            <h3 style="font-size:1.25rem;text-transform:uppercase;">Ponderación de evaluación</h3>
+            <div class="eval-bar" role="img" aria-label="50% práctica con rúbrica, 40% examen teórico, 10% participación y trabajos">
+              <div style="width:50%;background:var(--orange);color:var(--night);">50 %</div>
+              <div style="width:40%;background:var(--night);color:var(--cream);">40 %</div>
+              <div style="width:10%;background:#7D879E;color:var(--night);">10 %</div>
+            </div>
+            <div style="margin-top:1rem;display:flex;flex-wrap:wrap;gap:1rem 2rem;font-size:0.9rem;">
+              <span><strong>40 %</strong> examen teórico</span>
+              <span><strong>50 %</strong> práctica de enseñanza con rúbrica</span>
+              <span><strong>10 %</strong> participación y trabajos</span>
+            </div>
+          </div>
+          <div class="req-grid">
+            <div class="card-light">
+              <p class="font-display tabular" style="color:var(--orange-hover);font-weight:700;">Requisito 01</p>
+              <h3 style="margin-top:0.35rem;text-transform:uppercase;">Mínimo 8.0 en cada etapa</h3>
+              <p style="margin-top:0.4rem;font-size:0.875rem;color:rgba(20,26,43,0.8);">Evaluación continua para validar dominio práctico por bloque.</p>
+            </div>
+            <div class="card-light">
+              <p class="font-display tabular" style="color:var(--orange-hover);font-weight:700;">Requisito 02</p>
+              <h3 style="margin-top:0.35rem;text-transform:uppercase;">90 % de asistencia</h3>
+              <p style="margin-top:0.4rem;font-size:0.875rem;color:rgba(20,26,43,0.8);">Participación activa en las sesiones de cancha y aula.</p>
+            </div>
+            <div class="card-light">
+              <p class="font-display tabular" style="color:var(--orange-hover);font-weight:700;">Requisito 03</p>
+              <h3 style="margin-top:0.35rem;text-transform:uppercase;">Plan de gestión de grupo apto</h3>
+              <p style="margin-top:0.4rem;font-size:0.875rem;color:rgba(20,26,43,0.8);">Entrega de una planificación real para un grupo de iniciación.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 9. TU INSTRUCTOR -->
+      <section id="instructor" class="sec-dark">
+        <div class="container reveal">
+          <div class="instructor-grid">
+            <div>
+              <div style="background:#182034;border:1px solid rgba(245,241,234,0.16);border-radius:0.75rem;aspect-ratio:3/4;max-width:300px;overflow:hidden;">
+                <img src="/src/assets/images/instructor_coach_portrait_1795117387865.jpg" alt="Profesora Leyanis Horta en cancha de baloncesto" referrerpolicy="no-referrer" style="width:100%;height:100%;object-fit:cover;object-position:top;display:block;" />
+              </div>
+            </div>
+            <div>
+              <p class="kicker">Tu instructor</p>
+              <h2 class="sec-title">Profesora: Leyanis Horta</h2>
+              <p style="margin-top:0.5rem;font-weight:500;color:rgba(245,241,234,0.88);">
+                Directora Metodológica en Altura BC · +15 años en cancha
+              </p>
+              <p style="margin-top:1rem;color:rgba(245,241,234,0.8);max-width:40rem;">
+                Licenciada en Cultura Física y Entrenadora certificada en categorías formativas.
+                Nivel 1 de la Federación Catalana de Bàsquet en la ciudad de Barcelona, España. Ha
+                impartido clases en la Escuela de Instructores de Baloncesto en La Habana
+                (2005-2006), formando a más de 60 entrenadores de primer contacto en categorías de 8
+                a 14 años.
+              </p>
+              <ul style="margin-top:1rem;padding-left:1.1rem;color:rgba(245,241,234,0.85);font-size:0.9rem;display:flex;flex-direction:column;gap:0.4rem;">
+                <li>+15 temporadas dirigiendo categorías de 8 a 14 años y Seniors de 15 a 30 años, tanto femeninos como masculinos</li>
+                <li>Especialista en diseño de tareas y enseñanza comprensiva</li>
+                <li>Evaluadora metodológica en clínicas estatales de iniciación</li>
+              </ul>
+            </div>
+          </div>
+
+          <div style="margin-top:2.5rem;padding-top:2rem;border-top:1px solid rgba(245,241,234,0.15);">
+            <p class="kicker">Director de la academia</p>
+            <h3 class="font-display" style="font-size:1.75rem;font-weight:700;text-transform:uppercase;">Lic. Oscar de Rojas</h3>
+            <p style="margin-top:0.45rem;color:rgba(245,241,234,0.82);max-width:46rem;">
+              Entrenador con +25 años de experiencia y árbitro internacional. Actual colaborador en el
+              departamento de árbitros como consultor en las ligas profesionales de México.
+            </p>
+          </div>
+
+          <div class="logistics-grid">
+            <div style="display:flex;align-items:flex-start;gap:0.75rem;">
+              <img src="/assets/aistudio/altura-bc-perfil-1080x1080_f56c00a5.png" alt="Logo Altura BC" referrerpolicy="no-referrer" style="width:44px;height:44px;border-radius:999px;object-fit:cover;border:1px solid rgba(245,241,234,0.2);" />
+              <div><p class="kicker">Organiza</p><p><strong>Altura BC</strong><br /><span style="color:rgba(245,241,234,0.7);">CDMX · 2,240 m</span></p></div>
+            </div>
+            <div><p class="kicker">Fechas y horario</p><p class="tabular"><strong>18 de abril al 17 de mayo de 2026</strong><br /><span style="color:rgba(245,241,234,0.7);">Sábados y domingos de 8:30 a 14:30 h</span></p></div>
+            <div><p class="kicker">Lugar</p><p style="color:rgba(245,241,234,0.85);">Cancha Central Altura BC · Av. División del Norte 2333, Col. General Anaya, Benito Juárez, CDMX</p></div>
+            <div><p class="kicker">Precio y qué incluye</p><p class="tabular"><strong>$3,000 MXN</strong><br /><span style="color:rgba(245,241,234,0.75);">Manual digital, 64 h de formación, rúbricas y Constancia Nivel C.</span></p></div>
+            <div><p class="kicker">Cupo</p><p class="tabular"><strong>24 plazas disponibles</strong></p></div>
+            <div><p class="kicker">Contacto</p><p><a href="/ir-whatsapp" target="_blank" rel="noopener noreferrer" style="color:var(--orange);text-decoration:underline;">Escribir por WhatsApp</a><br />inscripciones@alturabc.mx</p></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 10. PREGUNTAS FRECUENTES -->
+      <section id="preguntas" class="sec-cream">
+        <div class="container reveal" style="max-width:56rem;">
+          <p class="kicker">Resuelve tus dudas</p>
+          <h2 class="sec-title">Preguntas frecuentes</h2>
+          <div class="faq-list" id="faqList">
+            <div class="faq-item open">
+              <button type="button" class="faq-btn" aria-expanded="true"><span>¿Necesito haber jugado baloncesto?</span><span class="faq-icon">▾</span></button>
+              <div class="faq-panel">No es requisito haber sido jugador federado. El curso está pensado para aspirantes, profesores de educación física, padres y exjugadores mayores de 18 años.</div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-btn" aria-expanded="false"><span>¿Qué edades aprenderé a entrenar?</span><span class="faq-icon">▾</span></button>
+              <div class="faq-panel">Toda la metodología está diseñada para niñas y niños de 8 a 14 años, desde la iniciación hasta el juego reducido.</div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-btn" aria-expanded="false"><span>¿Qué pasa si falto a una sesión?</span><span class="faq-icon">▾</span></button>
+              <div class="faq-panel">Debes cubrir al menos el 90 % de asistencia (máximo 6 horas de falta justificada) y completar la actividad de reposición asignada.</div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-btn" aria-expanded="false"><span>¿Qué recibo al terminar?</span><span class="faq-icon">▾</span></button>
+              <div class="faq-panel">Al cumplir asistencia, aprobar con mínimo 8.0 cada etapa y presentar tu plan de gestión de grupo apto, obtienes la Constancia de Entrenador Nivel C y el manual completo.</div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-btn" aria-expanded="false"><span>¿Qué tengo que llevar?</span><span class="faq-icon">▾</span></button>
+              <div class="faq-panel">Ropa y tenis cómodos de cancha, silbato, botella de agua y libreta o tableta. La sede proporciona balones, conos y petos.</div>
+            </div>
+            <div class="faq-item">
+              <button type="button" class="faq-btn" aria-expanded="false"><span>¿Cómo se paga?</span><span class="faq-icon">▾</span></button>
+              <div class="faq-panel">Al enviar tu preinscripción recibirás por WhatsApp y correo los datos para transferencia SPEI o depósito. Puedes apartar con el 50 %.</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 11. FORMULARIO DE INSCRIPCIÓN -->
+      <section id="inscripcion" class="sec-dark">
+        <div class="container reveal" style="max-width:56rem;">
+          <p class="kicker">Preinscripción en línea</p>
+          <h2 class="sec-title">Reserva tu lugar</h2>
+          <p style="margin-top:0.75rem;color:rgba(245,241,234,0.8);">
+            Aparta una de las 24 plazas disponibles ($3,000 MXN).
+          </p>
+
+          <form id="registrationForm" class="form-box" novalidate>
+            <div class="form-grid">
+              <div class="span-2">
+                <label class="field-label" for="nombre">Nombre completo *</label>
+                <input id="nombre" name="nombre" type="text" required placeholder="Ej. María Fernanda López" />
+                <div class="field-error" data-error="nombre"></div>
+              </div>
+              <div>
+                <label class="field-label" for="edad">Edad (mínimo 18 años) *</label>
+                <input id="edad" name="edad" type="number" min="18" max="90" required placeholder="Ej. 28" />
+                <div class="field-error" data-error="edad"></div>
+              </div>
+              <div>
+                <label class="field-label" for="ciudad">Ciudad *</label>
+                <input id="ciudad" name="ciudad" type="text" required placeholder="Ej. Zapopan, Jalisco" />
+                <div class="field-error" data-error="ciudad"></div>
+              </div>
+              <div>
+                <label class="field-label" for="whatsapp">WhatsApp (10 dígitos) *</label>
+                <input id="whatsapp" name="whatsapp" type="tel" required placeholder="Ej. 33 1234 5678" />
+                <div class="field-error" data-error="whatsapp"></div>
+              </div>
+              <div>
+                <label class="field-label" for="correo">Correo electrónico *</label>
+                <input id="correo" name="correo" type="email" required placeholder="nombre@correo.com" />
+                <div class="field-error" data-error="correo"></div>
+              </div>
+              <div>
+                <label class="field-label" for="experiencia">Experiencia *</label>
+                <select id="experiencia" name="experiencia" required>
+                  <option value="">Selecciona una opción</option>
+                  <option value="Ninguna">Ninguna</option>
+                  <option value="Entreno actualmente">Entreno actualmente</option>
+                  <option value="Fui jugador">Fui jugador</option>
+                  <option value="Soy profesor de educación física">Soy profesor de educación física</option>
+                </select>
+                <div class="field-error" data-error="experiencia"></div>
+              </div>
+              <div>
+                <label class="field-label" for="edadesObjetivo">¿Con qué edades quieres trabajar? *</label>
+                <select id="edadesObjetivo" name="edadesObjetivo" required>
+                  <option value="">Selecciona un rango</option>
+                  <option value="8 a 10 años">8 a 10 años</option>
+                  <option value="11 a 12 años">11 a 12 años</option>
+                  <option value="13 a 14 años">13 a 14 años</option>
+                  <option value="Todas las edades (8 a 14 años)">Todas las edades (8 a 14 años)</option>
+                </select>
+                <div class="field-error" data-error="edadesObjetivo"></div>
+              </div>
+              <div class="span-2">
+                <label class="field-label" for="origen">¿Cómo te enteraste del curso? *</label>
+                <select id="origen" name="origen" required>
+                  <option value="">Selecciona una opción</option>
+                  <option value="WhatsApp">WhatsApp</option>
+                  <option value="Redes sociales">Redes sociales</option>
+                  <option value="Recomendación">Recomendación</option>
+                  <option value="Club o escuela">Club o escuela</option>
+                  <option value="Otro">Otro</option>
+                </select>
+                <div class="field-error" data-error="origen"></div>
+              </div>
+              <div class="span-2">
+                <label style="display:flex;align-items:flex-start;gap:0.65rem;font-size:0.875rem;color:rgba(245,241,234,0.85);cursor:pointer;">
+                  <input id="aceptaPrivacidad" type="checkbox" style="margin-top:0.2rem;accent-color:var(--orange);" />
+                  <span>
+                    Acepto el
+                    <button type="button" data-open-privacy style="background:none;border:none;color:var(--orange);text-decoration:underline;cursor:pointer;padding:0;font:inherit;">Aviso de Privacidad</button>
+                    y autorizo el uso de mis datos para gestionar mi inscripción. *
+                  </span>
+                </label>
+                <div class="field-error" data-error="aceptaPrivacidad"></div>
+              </div>
+            </div>
+            <div style="margin-top:1.5rem;">
+              <button type="submit" class="btn-primary btn-lg">Reservar mi lugar</button>
+            </div>
+          </form>
+
+          <div id="confirmationBox" class="form-box" style="display:none;border-color:rgba(242,112,28,0.5);">
+            <h3 style="font-size:1.75rem;text-transform:uppercase;">¡Solicitud registrada!</h3>
+            <p id="confirmationText" style="margin-top:0.5rem;color:rgba(245,241,234,0.85);"></p>
+            <div style="margin-top:1.25rem;display:flex;flex-wrap:wrap;gap:0.75rem;">
+              <a id="waConfirmLink" href="#" target="_blank" rel="noopener noreferrer" class="btn-primary btn-lg">Enviar mis datos por WhatsApp</a>
+              <button id="resetFormBtn" type="button" style="padding:0.875rem 1.25rem;border-radius:0.5rem;background:transparent;border:1px solid rgba(245,241,234,0.25);color:var(--cream);cursor:pointer;font-family:inherit;">Registrar otra persona</button>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 12. PIE DE PÁGINA -->
+    <footer id="contacto">
+      <div class="container footer-grid">
+        <div style="display:flex;align-items:center;gap:0.75rem;">
+          <img src="/assets/aistudio/altura-bc-perfil-1080x1080_f56c00a5.png" alt="Logo Altura BC CDMX" referrerpolicy="no-referrer" style="width:44px;height:44px;border-radius:999px;object-fit:cover;border:1px solid rgba(245,241,234,0.2);" />
+          <div>
+            <p class="font-display" style="font-size:1.25rem;font-weight:700;text-transform:uppercase;">Altura BC</p>
+            <p style="margin-top:0.2rem;color:rgba(245,241,234,0.7);">CDMX · 2,240 m</p>
+          </div>
+        </div>
+        <div style="color:rgba(245,241,234,0.8);">
+          <p class="font-display" style="color:var(--orange);text-transform:uppercase;">Contacto</p>
+          <p style="margin-top:0.4rem;"><a href="/ir-whatsapp" target="_blank" rel="noopener noreferrer" style="text-decoration:underline;">Atención directa por WhatsApp</a></p>
+          <p>Correo: inscripciones@alturabc.mx</p>
+          <p>Redes: @alturabc.cdmx</p>
+        </div>
+        <div style="color:rgba(245,241,234,0.8);">
+          <p class="font-display" style="color:var(--orange);text-transform:uppercase;">Dirección y privacidad</p>
+          <p style="margin-top:0.4rem;">Cancha Central Altura BC · Av. División del Norte 2333, Col. General Anaya, CDMX</p>
+          <button type="button" data-open-privacy style="margin-top:0.5rem;background:none;border:none;color:var(--orange);text-decoration:underline;cursor:pointer;padding:0;font:inherit;">Aviso de Privacidad</button>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Botón flotante de WhatsApp en celular -->
+    <a class="wa-float" href="/ir-whatsapp" target="_blank" rel="noopener noreferrer" aria-label="Escribir por WhatsApp">
+      WhatsApp
+    </a>
+
+    <!-- Modal Aviso de Privacidad -->
+    <div id="privacyModal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="privacyTitle">
+      <div class="modal-card">
+        <div style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid rgba(20,26,43,0.15);padding-bottom:0.75rem;">
+          <h2 id="privacyTitle" style="font-size:1.5rem;text-transform:uppercase;">Aviso de Privacidad</h2>
+          <button id="closePrivacyBtn" type="button" style="background:none;border:none;font-size:1.25rem;cursor:pointer;">✕</button>
+        </div>
+        <div style="margin-top:1rem;font-size:0.9rem;display:flex;flex-direction:column;gap:0.75rem;color:rgba(20,26,43,0.85);">
+          <p>Altura BC utilizará tus datos exclusivamente para gestionar tu preinscripción, brindarte logística de horarios y sede en CDMX, y emitir tu Constancia de Entrenador Nivel C.</p>
+          <p>Para ejercer tus derechos ARCO escribe a inscripciones@alturabc.mx.</p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var FORM_ENDPOINT = ""; // Opcional: URL de Formspree o Google Forms
+
+        // Scroll reveal
+        var reveals = document.querySelectorAll(".reveal");
+        if ("IntersectionObserver" in window) {
+          var revObs = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+              if (entry.isIntersecting) {
+                entry.target.classList.add("visible");
+                revObs.unobserve(entry.target);
+              }
+            });
+          }, { threshold: 0.12 });
+          reveals.forEach(function (el) { revObs.observe(el); });
+        } else {
+          reveals.forEach(function (el) { el.classList.add("visible"); });
+        }
+
+        // Animated counters
+        var counters = document.querySelectorAll("[data-counter]");
+        var cifrasSec = document.getElementById("cifras");
+        function runCounters() {
+          counters.forEach(function (el) {
+            var target = Number(el.getAttribute("data-counter")) || 0;
+            var suffix = el.getAttribute("data-suffix") || "";
+            var start = performance.now();
+            function frame(now) {
+              var p = Math.min((now - start) / 900, 1);
+              el.textContent = Math.round((1 - Math.pow(1 - p, 3)) * target) + suffix;
+              if (p < 1) requestAnimationFrame(frame);
+            }
+            requestAnimationFrame(frame);
+          });
+        }
+        if (cifrasSec && "IntersectionObserver" in window) {
+          var cObs = new IntersectionObserver(function (entries) {
+            if (entries.some(function (e) { return e.isIntersecting; })) {
+              runCounters();
+              cObs.disconnect();
+            }
+          }, { threshold: 0.25 });
+          cObs.observe(cifrasSec);
+        } else {
+          runCounters();
+        }
+
+        // FAQ Accordion
+        document.querySelectorAll(".faq-btn").forEach(function (btn) {
+          btn.addEventListener("click", function () {
+            var item = btn.parentElement;
+            var isOpen = item.classList.contains("open");
+            document.querySelectorAll(".faq-item").forEach(function (other) {
+              other.classList.remove("open");
+              other.querySelector(".faq-btn").setAttribute("aria-expanded", "false");
+            });
+            if (!isOpen) {
+              item.classList.add("open");
+              btn.setAttribute("aria-expanded", "true");
+            }
+          });
+        });
+
+        // Privacy modal
+        var modal = document.getElementById("privacyModal");
+        document.querySelectorAll("[data-open-privacy]").forEach(function (trigger) {
+          trigger.addEventListener("click", function () {
+            modal.classList.add("open");
+          });
+        });
+        document.getElementById("closePrivacyBtn").addEventListener("click", function () {
+          modal.classList.remove("open");
+        });
+        modal.addEventListener("click", function (e) {
+          if (e.target === modal) modal.classList.remove("open");
+        });
+
+        // Registration form
+        var form = document.getElementById("registrationForm");
+        var confBox = document.getElementById("confirmationBox");
+        var confText = document.getElementById("confirmationText");
+        var waLink = document.getElementById("waConfirmLink");
+
+        function setErr(name, msg) {
+          var el = form.querySelector('[data-error="' + name + '"]');
+          if (el) el.textContent = msg || "";
+        }
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          var data = {
+            nombre: form.nombre.value.trim(),
+            edad: Number(form.edad.value),
+            ciudad: form.ciudad.value.trim(),
+            whatsapp: form.whatsapp.value.trim(),
+            correo: form.correo.value.trim(),
+            experiencia: form.experiencia.value,
+            edadesObjetivo: form.edadesObjetivo.value,
+            origen: form.origen.value,
+            privacidad: document.getElementById("aceptaPrivacidad").checked
+          };
+
+          var valid = true;
+          setErr("nombre", data.nombre.length >= 3 ? "" : "Escribe tu nombre completo.");
+          if (data.nombre.length < 3) valid = false;
+
+          var ageOk = !isNaN(data.edad) && data.edad >= 18 && data.edad <= 90;
+          setErr("edad", ageOk ? "" : "Debes ser mayor de 18 años.");
+          if (!ageOk) valid = false;
+
+          setErr("ciudad", data.ciudad.length >= 2 ? "" : "Indica tu ciudad.");
+          if (data.ciudad.length < 2) valid = false;
+
+          var waOk = data.whatsapp.replace(/\D/g, "").length >= 10;
+          setErr("whatsapp", waOk ? "" : "Ingresa un WhatsApp válido a 10 dígitos.");
+          if (!waOk) valid = false;
+
+          var mailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(data.correo);
+          setErr("correo", mailOk ? "" : "Ingresa un correo válido.");
+          if (!mailOk) valid = false;
+
+          setErr("experiencia", data.experiencia ? "" : "Selecciona tu experiencia.");
+          if (!data.experiencia) valid = false;
+
+          setErr("edadesObjetivo", data.edadesObjetivo ? "" : "Elige un rango de edades.");
+          if (!data.edadesObjetivo) valid = false;
+
+          setErr("origen", data.origen ? "" : "Selecciona cómo te enteraste.");
+          if (!data.origen) valid = false;
+
+          setErr("aceptaPrivacidad", data.privacidad ? "" : "Acepta el aviso de privacidad.");
+          if (!data.privacidad) valid = false;
+
+          if (!valid) return;
+
+          if (FORM_ENDPOINT) {
+            fetch(FORM_ENDPOINT, {
+              method: "POST",
+              headers: { "Content-Type": "application/json", Accept: "application/json" },
+              body: JSON.stringify(data)
+            }).catch(function () {});
+          }
+
+          var msg = [
+            "Hola, quiero apartar mi lugar en el curso Del Fundamento al Juego (Nivel C).",
+            "Nombre: " + data.nombre,
+            "Edad: " + data.edad + " años",
+            "Ciudad: " + data.ciudad,
+            "WhatsApp: " + data.whatsapp,
+            "Correo: " + data.correo,
+            "Experiencia: " + data.experiencia,
+            "Edades a entrenar: " + data.edadesObjetivo,
+            "Me enteré por: " + data.origen
+          ].join("\n");
+
+          waLink.href = "/ir-whatsapp?msg=" + encodeURIComponent(msg);
+          confText.textContent = "Gracias, " + data.nombre.split(" ")[0] + ". Envía tus datos por WhatsApp para confirmar tu lugar de inmediato.";
+          form.style.display = "none";
+          confBox.style.display = "block";
+        });
+
+        document.getElementById("resetFormBtn").addEventListener("click", function () {
+          form.reset();
+          form.style.display = "block";
+          confBox.style.display = "none";
+        });
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,18 @@
+{
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "framework": "vite",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "rewrites": [
+    {
+      "source": "/ir-whatsapp",
+      "destination": "/api/ir-whatsapp"
+    },
+    {
+      "source": "/((?!api/|assets/|src/|robots\\.txt|sitemap\\.xml|del-fundamento-al-juego\\.html).*)",
+      "destination": "/index.html"
+    }
+  ]
+}
