@@ -11,6 +11,14 @@ export interface CourseConfig {
   venue: string;
   priceMxn: string;
   priceIncludes: string;
+  paymentOptions: {
+    id: string;
+    label: string;
+    title: string;
+    amount: string;
+    description: string;
+    note: string;
+  }[];
   spotsAvailable: number;
   email: string;
   socialHandle: string;
@@ -42,6 +50,26 @@ export const COURSE_DATA: CourseConfig = {
   priceMxn: '$3,000 MXN',
   priceIncludes:
     'Manual metodológico digital, 64 h de formación, evaluaciones con rúbrica y Constancia de Entrenador Nivel C.',
+  paymentOptions: [
+    {
+      id: 'Pago único ($3,000 MXN)',
+      label: 'Forma de pago 01 · 1 exhibición',
+      title: 'Pago de contado',
+      amount: '$3,000 MXN',
+      description:
+        'Liquida el 100 % al inscribirte mediante transferencia SPEI o depósito bancario y confirma tu plaza de inmediato.',
+      note: 'Confirmación inmediata de tu lugar.',
+    },
+    {
+      id: '2 exhibiciones ($1,500 + $1,500 MXN)',
+      label: 'Forma de pago 02 · Apartado 50 %',
+      title: 'En 2 exhibiciones',
+      amount: '$1,500 + $1,500 MXN',
+      description:
+        'Aparta tu lugar hoy con $1,500 MXN y liquida los $1,500 MXN restantes antes del inicio del curso (18 de abril de 2026).',
+      note: 'Transferencia SPEI o depósito bancario.',
+    },
+  ],
   spotsAvailable: 24,
   email: 'inscripciones@alturabc.mx',
   socialHandle: '@alturabc.cdmx',

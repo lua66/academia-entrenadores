@@ -36,6 +36,7 @@ interface RegistrationFormState {
   correo: string;
   experiencia: string;
   edadesObjetivo: string;
+  formaPago: string;
   origen: string;
   aceptaPrivacidad: boolean;
 }
@@ -48,6 +49,7 @@ const INITIAL_FORM: RegistrationFormState = {
   correo: '',
   experiencia: '',
   edadesObjetivo: '',
+  formaPago: 'Pago único ($3,000 MXN)',
   origen: '',
   aceptaPrivacidad: false,
 };
@@ -289,6 +291,7 @@ export default function App() {
       `*Correo:* ${data.correo}`,
       `*Experiencia:* ${data.experiencia}`,
       `*Edades a entrenar:* ${data.edadesObjetivo}`,
+      `*Forma de pago elegida:* ${data.formaPago}`,
       `*Me enteré por:* ${data.origen}`,
     ].join('\n');
 
@@ -832,8 +835,94 @@ export default function App() {
     </section>
   );
 
+  const selectPaymentAndScroll = (optionId: string) => {
+    handleFieldChange('formaPago', optionId);
+    const el = document.getElementById('inscripcion');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const renderPricingSection = () => (
+    <section
+      id="precios"
+      className="py-16 sm:py-24 bg-[#0E1320] text-[#F5F1EA] border-t border-[#F5F1EA]/12"
+    >
+      <div className="max-w-5xl mx-auto px-4 sm:px-6">
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-10 reveal-item">
+          <div>
+            <p className="text-xs sm:text-sm font-medium tracking-wide text-[#F2701C]">
+              Inversión transparente · Sin costos ocultos
+            </p>
+            <h2 className="mt-2 font-display text-3xl sm:text-5xl font-bold uppercase tracking-tight text-[#F5F1EA]">
+              Precio y formas de pago
+            </h2>
+            <p className="mt-3 text-sm sm:text-base text-[#F5F1EA]/80 max-w-2xl leading-relaxed">
+              {COURSE_DATA.priceIncludes}
+            </p>
+          </div>
+          <div className="shrink-0">
+            <p className="text-xs text-[#F5F1EA]/65">Costo total del curso</p>
+            <p className="font-display text-4xl sm:text-5xl font-bold text-[#F2701C] tabular-nums">
+              {COURSE_DATA.priceMxn}
+            </p>
+          </div>
+        </div>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 reveal-item">
+          {COURSE_DATA.paymentOptions.map((option, idx) => (
+            <div
+              key={option.id}
+              className={`rounded-xl p-6 sm:p-8 flex flex-col justify-between border ${
+                idx === 1
+                  ? 'bg-[#1B2338] border-[#F2701C]/50'
+                  : 'bg-[#141A2B] border-[#F5F1EA]/15'
+              }`}
+            >
+              <div>
+                <p className="text-xs font-medium text-[#F2701C]">{option.label}</p>
+                <div className="mt-2 flex items-baseline justify-between gap-4">
+                  <h3 className="font-display text-2xl sm:text-3xl font-bold uppercase text-[#F5F1EA]">
+                    {option.title}
+                  </h3>
+                  <span className="font-display text-2xl font-bold text-[#F2701C] tabular-nums whitespace-nowrap">
+                    {option.amount}
+                  </span>
+                </div>
+                <p className="mt-3 text-sm sm:text-base leading-relaxed text-[#F5F1EA]/80">
+                  {option.description}
+                </p>
+                <p className="mt-3 text-xs text-[#F5F1EA]/65">{option.note}</p>
+              </div>
+
+              <div className="mt-6 pt-5 border-t border-[#F5F1EA]/12">
+                <button
+                  type="button"
+                  onClick={() => selectPaymentAndScroll(option.id)}
+                  className={`w-full inline-flex items-center justify-center gap-2 px-5 py-3 rounded-lg font-semibold text-sm transition-colors ${
+                    idx === 1
+                      ? 'bg-[#F2701C] hover:bg-[#D95E0E] text-[#141A2B]'
+                      : 'bg-[#F5F1EA] hover:bg-[#EAE3D7] text-[#141A2B]'
+                  }`}
+                >
+                  <span>Elegir {option.title.toLowerCase()}</span>
+                  <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                </button>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <p className="mt-6 text-xs sm:text-sm text-[#F5F1EA]/70">
+          Al enviar el formulario inferior recibirás los datos bancarios para transferencia SPEI o
+          depósito y confirmación directa de tu plaza.
+        </p>
+      </div>
+    </section>
+  );
+
   const renderFormSection = () => (
-    <section id="inscripcion" className="py-16 sm:py-24 bg-[#141A2B] text-[#F5F1EA]">
+    <section id="inscripcion" className="py-16 sm:py-24 bg-[#141A2B] text-[#F5F1EA] border-t border-[#F5F1EA]/12">
       <div className="max-w-4xl mx-auto px-4 sm:px-6">
         <div className="mb-10 reveal-item">
           <p className="text-xs sm:text-sm font-medium tracking-wide text-[#F2701C]">
@@ -897,6 +986,10 @@ export default function App() {
                 <dd className="font-medium text-[#F5F1EA]">
                   {submittedData.experiencia} · {submittedData.edadesObjetivo}
                 </dd>
+              </div>
+              <div className="sm:col-span-2">
+                <dt className="text-[#F5F1EA]/60">Forma de pago elegida</dt>
+                <dd className="font-medium text-[#F2701C]">{submittedData.formaPago}</dd>
               </div>
             </dl>
 
@@ -1101,6 +1194,29 @@ export default function App() {
               </div>
 
               <div className="sm:col-span-2">
+                <label
+                  htmlFor="formaPago"
+                  className="block text-sm font-medium text-[#F5F1EA] mb-1.5"
+                >
+                  Forma de pago preferida *
+                </label>
+                <select
+                  id="formaPago"
+                  name="formaPago"
+                  required
+                  value={form.formaPago}
+                  onChange={(e) => handleFieldChange('formaPago', e.target.value)}
+                  className="w-full px-4 py-3 rounded-lg bg-[#141A2B] border border-[#F5F1EA]/20 text-[#F5F1EA] focus:outline-none focus:border-[#F2701C]"
+                >
+                  {COURSE_DATA.paymentOptions.map((opt) => (
+                    <option key={opt.id} value={opt.id}>
+                      {opt.title} — {opt.amount}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="sm:col-span-2">
                 <label htmlFor="origen" className="block text-sm font-medium text-[#F5F1EA] mb-1.5">
                   ¿Cómo te enteraste del curso? *
                 </label>
@@ -1294,6 +1410,20 @@ export default function App() {
               Nivel C
             </a>
             <a
+              href="/#precios"
+              onClick={(e) => {
+                e.preventDefault();
+                if (currentPath === '/inscripcion') {
+                  navigateTo('/inscripcion', 'precios');
+                } else {
+                  navigateTo('/', 'precios');
+                }
+              }}
+              className="hover:text-[#F5F1EA] hover:underline underline-offset-4 transition-colors whitespace-nowrap shrink-0"
+            >
+              Precios
+            </a>
+            <a
               href="/#preguntas"
               onClick={(e) => {
                 e.preventDefault();
@@ -1372,6 +1502,7 @@ export default function App() {
               `Sede en ${COURSE_DATA.cityState} · ${COURSE_DATA.startDate} al ${COURSE_DATA.endDate}. Aparta una de las ${COURSE_DATA.spotsAvailable} plazas disponibles.`,
               'Inscripción'
             )}
+            {renderPricingSection()}
             {renderFormSection()}
             {renderInstructorSection()}
           </>
@@ -1496,13 +1627,20 @@ export default function App() {
                     <span>Mayores de 18 años</span>
                   </div>
 
-                  <div className="pt-2">
+                  <div className="pt-2 flex flex-wrap items-center gap-3">
                     <a
                       href="#inscripcion"
                       className="inline-flex items-center gap-2.5 px-7 py-3.5 rounded-lg bg-[#F2701C] hover:bg-[#D95E0E] text-[#141A2B] font-semibold text-base transition-colors whitespace-nowrap focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5F1EA]"
                     >
                       <span>Quiero inscribirme</span>
                       <ArrowRight className="w-4 h-4" aria-hidden="true" />
+                    </a>
+
+                    <a
+                      href="#precios"
+                      className="inline-flex items-center gap-2 px-5 py-3.5 rounded-lg border border-[#F5F1EA]/25 hover:border-[#F2701C] text-[#F5F1EA] hover:text-[#F2701C] font-medium text-base transition-colors whitespace-nowrap tabular-nums focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F2701C]"
+                    >
+                      <span>Precios · {COURSE_DATA.priceMxn}</span>
                     </a>
                   </div>
                 </div>
@@ -1619,6 +1757,9 @@ export default function App() {
 
             {/* 10. PREGUNTAS FRECUENTES */}
             {renderFaqSection()}
+
+            {/* PRECIOS Y FORMAS DE PAGO */}
+            {renderPricingSection()}
 
             {/* 11. FORMULARIO DE INSCRIPCIÓN */}
             {renderFormSection()}
@@ -1766,13 +1907,13 @@ export default function App() {
         </div>
       </footer>
 
-      {/* Botón flotante de WhatsApp visible en celular (número oculto vía /ir-whatsapp) */}
+      {/* Botón flotante de WhatsApp siempre visible (número oculto vía /ir-whatsapp) */}
       <a
         href={whatsappDirectUrl}
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Escribir por WhatsApp sobre el curso"
-        className="md:hidden fixed bottom-4 right-4 z-40 inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[#F2701C] hover:bg-[#D95E0E] text-[#141A2B] font-semibold text-sm shadow-xl border border-[#141A2B]/15 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5F1EA]"
+        className="fixed bottom-5 right-5 z-40 inline-flex items-center gap-2 px-4 py-3 rounded-full bg-[#25D366] hover:bg-[#1FB857] text-[#0B141A] font-semibold text-sm shadow-2xl border border-[#0B141A]/15 transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#F5F1EA]"
       >
         <MessageCircle className="w-5 h-5" aria-hidden="true" />
         <span>WhatsApp</span>
